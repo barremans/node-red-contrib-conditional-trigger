@@ -1,0 +1,77 @@
+[
+    {
+        "id": "cda03df45f84c721",
+        "type": "subflow",
+        "name": "conditional-trigger",
+        "info": "check 2 inputs using msg.topic.\nInput names must be input1 and input2.\n\nTesting the Flow\nClick Inject 1 true → Sends { topic: \"input1\", payload: true }.\nClick Inject 2 true → Sends { topic: \"input2\", payload: true }.\n\njoin example input to logica:\n{\n    \"input1\": true,\n    \"input2\": true\n}\n",
+        "category": "",
+        "in": [{"x": 60, "y": 80, "wires": [{"id": "cfd9da19a62035bf"}]}],
+        "out": [
+            {"x": 780, "y": 80, "wires": [{"id": "cd9df17ada06dc16", "port": 0}]},
+            {"x": 780, "y": 80, "wires": [{"id": "cd9df17ada06dc16", "port": 1}]}
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "status": {"x": 580, "y": 140, "wires": [{"id": "ae8c90e922404bde", "port": 0}]}
+    },
+    {
+        "id": "cfd9da19a62035bf",
+        "type": "join",
+        "z": "cda03df45f84c721",
+        "name": "join msg.topic",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "",
+        "count": 2,
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 220,
+        "y": 80,
+        "wires": [["ae8c90e922404bde"]]
+    },
+    {
+        "id": "ae8c90e922404bde",
+        "type": "function",
+        "z": "cda03df45f84c721",
+        "name": "check join",
+        "func": "// Check if both inputs are true\nif (msg.payload.input1 === true && msg.payload.input2 === true) {\n    return { topic: \"both_true\", payload: \"fire_event_1\" }; // Both are true\n} else {\n    return { topic: \"not_both_true\", payload: \"fire_event_2\" }; // At least one is not true\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 80,
+        "wires": [["cd9df17ada06dc16"]]
+    },
+    {
+        "id": "cd9df17ada06dc16",
+        "type": "switch",
+        "z": "cda03df45f84c721",
+        "name": "true or false ",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {"t": "eq", "v": "both_true", "vt": "str"},
+            {"t": "eq", "v": "not_both_true", "vt": "str"}
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 80,
+        "wires": [[], []]
+    }
+]
