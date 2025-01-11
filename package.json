@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-conditional-trigger",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Node-RED subflow for triggering conditional events based on multiple input messages. The subflow evaluates if two incoming messages meet specific conditions (e.g., both msg.payload values are true) and routes the result to different outputs. Ideal for scenarios requiring logical validation, such as automation workflows, IoT event processing, and decision-making systems.",
   "keywords": [
     "node-red",
