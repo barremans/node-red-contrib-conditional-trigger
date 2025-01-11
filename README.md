@@ -2,7 +2,7 @@
 
 **A Node-RED subflow for triggering conditional events based on multiple input messages.**
 
-This subflow evaluates two incoming messages to determine if they meet specific conditions (e.g., both `msg.payload` values are `true`). It routes the results to different outputs based on the evaluation. Ideal for automation workflows, IoT event processing, and decision-making systems.
+This subflow evaluates two incoming messages to determine if they meet specific conditions (e.g., both `msg.input` values are `true`). It routes the results to different outputs based on the evaluation. Ideal for automation workflows, IoT event processing, and decision-making systems.
 
 ---
 
@@ -28,11 +28,11 @@ To use this subflow, you can install it via npm in your Node-RED environment:
 This subflow expects two input messages with the following structure:
 
 ### Input 1:
-- `msg.payload = true | false`
+- `msg.input = true | false`
 - `msg.topic = "input1"`
 
 ### Input 2:
-- `msg.payload = true | false`
+- `msg.input = true | false`
 - `msg.topic = "input2"`
 
 The subflow combines these messages, evaluates their conditions, and routes the result to the appropriate output.
@@ -55,7 +55,7 @@ Here’s an example flow to test the subflow:
         "name": "Input 1: True",
         "props": [
             {
-                "p": "payload",
+                "p": "input",
                 "v": "true",
                 "vt": "bool"
             },
@@ -73,7 +73,7 @@ Here’s an example flow to test the subflow:
         "name": "Input 2: True",
         "props": [
             {
-                "p": "payload",
+                "p": "input",
                 "v": "true",
                 "vt": "bool"
             },
